@@ -11,7 +11,7 @@ Written report: [`HW1_Report.pdf`](HW1_Report.pdf)
 
 | File | Role |
 |------|------|
-| `HW1_Report.pdf` | Written report (also uploaded to Canvas) |
+| `HW1_Report.pdf` | Written report |
 | `neural_networks.ipynb` | Autoregressive models + diabetes NN (PyTorch and TensorFlow) |
 | `cuda.ipynb` | CUDA build/run, timing table, nvprof output |
 | `matmul.cu` | CUDA matrix multiplication |
