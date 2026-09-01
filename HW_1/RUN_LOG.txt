@@ -1,0 +1,45 @@
+DATA 266 HW1 — RUN_LOG
+SID4=0670  SEED=670  SLICE=670  HP_ID=4  CLS_A=0  CLS_B=5
+2026-08-30  notebook run on kernel Python (HW1) / Python 3.12.13
+
+# neural_networks.ipynb  seed 670
+pytorch baseline test acc: 0.7017543859649122
+pytorch modified test acc: 0.6228070175438597
+tensorflow baseline test acc: 0.719298243522644
+tensorflow modified test acc: 0.6491228342056274
+
+# 3 training seeds from executed notebook (2026-08-30 18:46)
+--- seed 670 ---
+pytorch baseline 0.7017543859649122
+pytorch modified 0.6228070175438597
+tensorflow baseline 0.6578947305679321
+tensorflow modified 0.6315789222717285
+--- seed 671 ---
+pytorch baseline 0.6403508771929824
+pytorch modified 0.5964912280701754
+tensorflow baseline 0.6929824352264404
+tensorflow modified 0.6491228342056274
+--- seed 672 ---
+pytorch baseline 0.6666666666666666
+pytorch modified 0.5789473684210527
+tensorflow baseline 0.6842105388641357
+tensorflow modified 0.6315789222717285
+pt base mean 0.6696 std 0.0252
+pt mod  mean 0.5994 std 0.0180
+tf base mean 0.6784 std 0.0149
+tf mod  mean 0.6374 std 0.0083
+
+# cuda.ipynb / matmul  (Colab Tesla T4, downloaded 2026-08-30 20:40)
+nvcc compiled matmul.cu
+SID4=0670  C = A * B
+       N       CPU_ms      kernel_ms     H2D+D2H_ms    speedup
+     256       25.308          0.146          0.437     43.376
+  N=256 max |CPU-GPU| = 1.78814e-07
+    1024     3291.187          9.187          4.756    236.054
+    4096   763322.870        362.831         72.603   1753.016
+
+nsys: command not found
+nvprof ./matmul  OK
+ GPU activities:   88.84%  gpu_matmul
+                    6.57%  [CUDA memcpy HtoD]
+                    4.59%  [CUDA memcpy DtoH]
