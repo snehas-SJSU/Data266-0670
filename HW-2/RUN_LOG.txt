@@ -1,0 +1,101 @@
+DATA 266 HW2 — RUN_LOG
+SID4=0670  SEED=670  SLICE=670  HP_ID=4  CLS_A=0  CLS_B=5
+Kernel: Python (HW1) / Python 3.12.13
+2026-09-05  local Mac (mps for Part 3 except AMP)
+2026-09-05  tensor-create re-timed with torch.mps.synchronize()
+2026-09-06  Colab Tesla T4 mixed precision (amp_cuda_colab.ipynb)
+
+# embeddings.ipynb
+vocab: 3000000
+vector size: 300
+cast/score/plot/screen/review in vocab: True
+
+IMDB folder: ~/.keras/datasets/aclImdb_v1_extracted/aclImdb
+review files on disk: 25000
+using: 5000 reviews
+tokenized reviews: 5000
+reviews containing 'cast': 672
+reviews containing 'score': 178
+reviews containing 'plot': 1015
+reviews containing 'screen': 439
+reviews containing 'review': 184
+
+IMDB vocab: 38403 reviews: 5000
+copied pretrained vectors: 30312 / 38403
+
+BEFORE (Google News)
+cast     casts=0.722; casting=0.719; Cast=0.664
+score    scoring=0.720; scores=0.660; scored=0.638
+plot     plots=0.762; Plot=0.652; plotting=0.633
+screen   screens=0.773; onscreen=0.612; LCD_screen=0.560
+review   reviewed=0.663; reviewing=0.661; reviews=0.638
+
+AFTER (IMDB)
+cast     casting=0.726; actors=0.706; supporting=0.700
+score    scores=0.678; scoring=0.675; scored=0.618
+plot     plots=0.729; story=0.719; storyline=0.699
+screen   screens=0.691; stage=0.619; theatre=0.593
+review   reviews=0.784; uwe=0.694; seagal=0.687
+
+cosine original vs finetuned
+cast 0.8019
+score 0.8618
+plot 0.7806
+screen 0.7885
+review 0.7306
+shifted the MOST: review
+shifted the LEAST: score
+
+# rag.ipynb
+documents: 10 (each 15000 chars)
+chunks 500/50: 439
+chunks 200/20: 970
+
+Q1 Who directed The Batman?  A: Matt Reeves  (The Batman (film) rank 1)
+Q2 Dune year?                 A: 2021         (Dune: Part Two rank 1; 2021 film rank 2)
+Q3 Parasite Cannes?           A: Academy Award for Best Picture  (Palme d'Or is in rank 1)
+Q4 Inception composer?        A: Nolan        (Hans Zimmer not in top-3)
+Q5 Jack Dawson?               A: Leonardo DiCaprio  (rank 2; rank 1 is J. Dawson grave)
+
+Q1 200/20: still Matt Reeves; ranks 2-3 Batman Begins
+Q2 200/20: still 2021
+
+Retrieval Success Rate = 4/5 = 0.80
+
+# optimizations.ipynb
+device: mps
+X (64, 512) on mps:0
+batch 64, steps 40, depth 12, width 512
+
+tensor create 2048x2048 mean of 3
+cpu 61.087 ms
+mps 2.167 ms   mem 0.1
+(sync: torch.mps.synchronize before/after each timed create; mean of 3 after warmup)
+
+init     seconds  mem_mb  final_loss
+default  4.559    28.4    1.4873
+xavier   0.231    26.3    1.6886
+zeros    0.204    26.3    2.2914
+
+checkpoint  seconds  mem_mb  final_loss
+False       0.273    26.3    1.4873
+True        0.333    26.3    1.4873
+
+accum  micro  seconds  mem_mb  final_loss
+1      64     0.395    26.3    1.4873
+4      16     0.990    26.2    1.5353
+
+# MPS amp cell (not mixed precision; still fp32) — discarded for the AMP claim
+amp    seconds  mem_mb  final_loss
+False  0.329    26.2    1.4873   fp32 on mps
+True   0.207    26.2    1.4873   still fp32 on mps
+
+# CUDA mixed precision — Colab Tesla T4, torch 2.11.0+cu128
+# used_fp16: True
+# warmup untimed; times are mean of 3 after torch.cuda.synchronize()
+# peak_mem_mb = torch.cuda.max_memory_allocated
+amp    seconds  peak_mem_mb  final_loss  forward_dtype
+False  0.2343   82.6         1.4924      torch.float32
+True   0.2688   82.6         1.4793      torch.float16  (autocast cuda float16 + GradScaler)
+repeats fp32: 0.2315, 0.2049, 0.2666
+repeats amp:  0.3510, 0.2303, 0.2252
