@@ -5,10 +5,13 @@ SID4 = 0670 | SEED = 670 | SLICE = 670 | HP_ID = 4 | CLS_A = 0 | CLS_B = 5
 
 HP_ID is reported only. HW2 has no HP_ID mapping.
 
+Written report: [`HW2_Report.pdf`](HW2_Report.pdf)
+
 ## Files
 
 | File | Role |
 |------|------|
+| `HW2_Report.pdf` | Written report |
 | `embeddings.ipynb` | Part 1 — Word2Vec + IMDB |
 | `rag.ipynb` | Part 2 — Wikipedia RAG |
 | `optimizations.ipynb` | Part 3 — training tricks (MPS; AMP pointer) |
