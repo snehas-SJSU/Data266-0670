@@ -30,4 +30,4 @@ I ran those two cells after zero-shot / few-shot / CoT. I expected a sentence li
 
 4. What did you change, and why does your version work?
 
-I left the two-step meta cells in, because that is the technique, and I documented that this model cannot do it. I did not swap in ChatGPT screenshots (assignment said no). For attention I kept the mask *before* softmax. After training, `torch.triu(w_m, diagonal=1).max()` printed `0.0`, so future tokens are actually blocked. If I had masked after softmax the upper triangle would not be zero. I used that print as the check, not the assistant's description of the plot.
+I left the two-step meta cells in, because that is the technique, and I wrote down that Flan-T5 cannot do it. I still called it from code (`PromptTemplate` + `llm.invoke`), not from a chat window. For attention I kept the mask *before* softmax. After training, `torch.triu(w_m, diagonal=1).max()` printed `0.0`, so future tokens are actually blocked. If I had masked after softmax the upper triangle would not be zero. I used that print as the check, not the assistant's description of the plot.
