@@ -1,0 +1,63 @@
+DATA 266 HW3 — RUN_LOG
+SID4=0670  SEED=670  HP_ID=4 (reported only)
+kernel: Python (HW1)
+notebook: attention.ipynb
+
+# cell 1
+SID4: 670
+SEED: 670
+SLICE: 670
+HP_ID: 4
+CLS_A: 0
+CLS_B: 5
+HP_ID is reported only. no extra HP model this hw
+two trained models = unmasked attention and masked attention
+
+# flan-t5
+llm ready
+
+# zero-shot
+PROMPT: What is 15 percent of 80?
+OUT: 98.6
+PROMPT: In the sentence 'she sat on the bank of the river', does bank mean money or the side of a river?
+OUT: side of a river
+
+# few-shot
+59
+river
+
+# CoT
+80%
+Alice > Bob > Cara
+
+# zero-shot CoT
+The percentage of 80 is 15%. The percentage of 80 is 15%. The answer: 15.
+Bob is the youngest. Bob is the youngest. The answer: Bob.
+
+# meta
+generated prompt: 80%
+OUT: 80% of the population is white.
+generated prompt: bank
+OUT: bank
+
+# ToT
+-2.5
+i saw the man with the telescope
+
+# tokens
+n tokens: 46
+vocab: 40
+
+# unmasked
+epoch 100 loss 0.3599 masked= False
+epoch 200 loss 0.3321 masked= False
+epoch 300 loss 0.3318 masked= False
+epoch 400 loss 0.3316 masked= False
+row sums ~ 1: tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000])
+
+# causal
+epoch 100 loss 0.0743 masked= True
+epoch 200 loss 0.0623 masked= True
+epoch 300 loss 0.0929 masked= True
+epoch 400 loss 0.2093 masked= True
+upper triangle max (should be ~0): 0.0
