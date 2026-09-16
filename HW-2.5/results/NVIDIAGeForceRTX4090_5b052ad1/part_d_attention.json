@@ -1,0 +1,469 @@
+{
+  "part": "D",
+  "gpu": {
+    "hostname": "ADS-R15-840-01",
+    "timestamp_utc": "2026-09-14T23:23:31.383769+00:00",
+    "device_index": 0,
+    "name": "NVIDIA GeForce RTX 4090",
+    "uuid": "GPU-5b052ad1-4272-40db-4b25-c930bf32b547",
+    "driver_version": "595.95",
+    "cuda_version_smi": "13.2",
+    "cuda_version_torch": "13.0",
+    "torch_version": "2.14.0+cu130",
+    "python": "3.12.10",
+    "vram_total_smi": "24564 MiB",
+    "vram_total_bytes": 25756696576,
+    "power_limit": "450.00 W",
+    "capability": "8.9",
+    "multi_processor_count": 128,
+    "nvidia_smi_parsed": {
+      "name": "NVIDIA GeForce RTX 4090",
+      "uuid": "GPU-5b052ad1-4272-40db-4b25-c930bf32b547",
+      "driver_version": "595.95",
+      "cuda_version": "13.2",
+      "vram_total": "24564 MiB",
+      "power_limit": "450.00 W",
+      "persistence_mode": "N/A",
+      "compute_mode": "Default",
+      "gpu_clock_max": "3105 MHz",
+      "mem_clock_max": "10501 MHz"
+    }
+  },
+  "uuid": "GPU-5b052ad1-4272-40db-4b25-c930bf32b547",
+  "config": {
+    "batch_size": 1,
+    "n_heads": 32,
+    "head_dim": 64,
+    "dtype": "bfloat16",
+    "why": "batch=1 and head_dim=64 as the two chosen knobs. n_heads=32 so the naive S\u00d7S tensor OOMs on 24\u201332 GB inside the assigned sequence list."
+  },
+  "backends": {
+    "torch": "2.14.0+cu130",
+    "flash_sdp_enabled": true,
+    "mem_efficient_sdp_enabled": true,
+    "math_sdp_enabled": true,
+    "flash_attn_package": false
+  },
+  "fused_available": true,
+  "fused_error": null,
+  "naive": {
+    "coarse": [
+      {
+        "ok": true,
+        "kind": "naive",
+        "seq": 512,
+        "peak_memory_bytes": 50462720,
+        "allocated_after_fwd_bytes": 16908288,
+        "allocated_before_bytes": 0,
+        "mean_latency_ms": 0.1044356008991599,
+        "std_latency_ms": 0.010519502891088616,
+        "reps": 80,
+        "warmup": 5,
+        "cv": 0.10072717349753131,
+        "out_shape": [
+          1,
+          32,
+          512,
+          64
+        ]
+      },
+      {
+        "ok": true,
+        "kind": "naive",
+        "seq": 1024,
+        "peak_memory_bytes": 159514624,
+        "allocated_after_fwd_bytes": 25296896,
+        "allocated_before_bytes": 8519680,
+        "mean_latency_ms": 0.454993999004364,
+        "std_latency_ms": 0.03995949830627503,
+        "reps": 80,
+        "warmup": 5,
+        "cv": 0.08782423151451667,
+        "out_shape": [
+          1,
+          32,
+          1024,
+          64
+        ]
+      },
+      {
+        "ok": true,
+        "kind": "naive",
+        "seq": 2048,
+        "peak_memory_bytes": 578945024,
+        "allocated_after_fwd_bytes": 42074112,
+        "allocated_before_bytes": 8519680,
+        "mean_latency_ms": 1.8870432063937188,
+        "std_latency_ms": 0.029078646355440732,
+        "reps": 80,
+        "warmup": 5,
+        "cv": 0.01540963463736064,
+        "out_shape": [
+          1,
+          32,
+          2048,
+          64
+        ]
+      },
+      {
+        "ok": true,
+        "kind": "naive",
+        "seq": 4096,
+        "peak_memory_bytes": 2223112192,
+        "allocated_after_fwd_bytes": 75628544,
+        "allocated_before_bytes": 8519680,
+        "mean_latency_ms": 7.231046408414841,
+        "std_latency_ms": 0.056279044058215884,
+        "reps": 80,
+        "warmup": 5,
+        "cv": 0.007782973705261164,
+        "out_shape": [
+          1,
+          32,
+          4096,
+          64
+        ]
+      },
+      {
+        "ok": true,
+        "kind": "naive",
+        "seq": 8192,
+        "peak_memory_bytes": 8732672000,
+        "allocated_after_fwd_bytes": 142737408,
+        "allocated_before_bytes": 8519680,
+        "mean_latency_ms": 28.674932547977992,
+        "std_latency_ms": 0.08684326675833623,
+        "reps": 28,
+        "warmup": 5,
+        "cv": 0.0030285430179489634,
+        "out_shape": [
+          1,
+          32,
+          8192,
+          64
+        ]
+      },
+      {
+        "ok": true,
+        "kind": "naive",
+        "seq": 16384,
+        "peak_memory_bytes": 34636693504,
+        "allocated_after_fwd_bytes": 276955136,
+        "allocated_before_bytes": 8519680,
+        "mean_latency_ms": 918.1070434570313,
+        "std_latency_ms": 4.687983620475118,
+        "reps": 10,
+        "warmup": 5,
+        "cv": 0.005106140568122679,
+        "out_shape": [
+          1,
+          32,
+          16384,
+          64
+        ]
+      }
+    ],
+    "oom_bounds": {
+      "refined": true,
+      "largest_success": 26752,
+      "smallest_fail": 26816,
+      "gap_tokens": 64,
+      "step_floor": 64,
+      "single_token_resolution": false,
+      "probes": [
+        {
+          "seq": 24576,
+          "ok": true,
+          "oom": null,
+          "peak_memory_bytes": 77720584192,
+          "error": null
+        },
+        {
+          "seq": 28672,
+          "ok": false,
+          "oom": true,
+          "peak_memory_bytes": null,
+          "error": "CUDA out of memory. Tried to allocate 49.00 GiB. GPU 0 has a total capacity of 23.99 GiB of which 0 bytes is free. Process 17832 has 17179869184.00 GiB memory in use. Process 25148 has 17179869184.00 GiB memory in use. Process 26032 has 17179869184.00 GiB memory in use. Process 26172 has 17179869184.00 GiB memory in use. Process 29156 has 17179869184.00 GiB memory in use. Process 29876 has 1717986"
+        },
+        {
+          "seq": 26624,
+          "ok": true,
+          "oom": null,
+          "peak_memory_bytes": 91175911424,
+          "error": null
+        },
+        {
+          "seq": 27648,
+          "ok": false,
+          "oom": true,
+          "peak_memory_bytes": null,
+          "error": "CUDA out of memory. Tried to allocate 45.56 GiB. GPU 0 has a total capacity of 23.99 GiB of which 0 bytes is free. Process 17832 has 17179869184.00 GiB memory in use. Process 25148 has 17179869184.00 GiB memory in use. Process 26032 has 17179869184.00 GiB memory in use. Process 26172 has 17179869184.00 GiB memory in use. Process 29156 has 17179869184.00 GiB memory in use. Process 29876 has 1717986"
+        },
+        {
+          "seq": 27136,
+          "ok": false,
+          "oom": true,
+          "peak_memory_bytes": null,
+          "error": "CUDA out of memory. Tried to allocate 43.89 GiB. GPU 0 has a total capacity of 23.99 GiB of which 0 bytes is free. Process 17832 has 17179869184.00 GiB memory in use. Process 25148 has 17179869184.00 GiB memory in use. Process 26032 has 17179869184.00 GiB memory in use. Process 26172 has 17179869184.00 GiB memory in use. Process 29156 has 17179869184.00 GiB memory in use. Process 29876 has 1717986"
+        },
+        {
+          "seq": 26880,
+          "ok": false,
+          "oom": true,
+          "peak_memory_bytes": null,
+          "error": "CUDA out of memory. Tried to allocate 43.07 GiB. GPU 0 has a total capacity of 23.99 GiB of which 0 bytes is free. Process 17832 has 17179869184.00 GiB memory in use. Process 25148 has 17179869184.00 GiB memory in use. Process 26032 has 17179869184.00 GiB memory in use. Process 26172 has 17179869184.00 GiB memory in use. Process 29156 has 17179869184.00 GiB memory in use. Process 29876 has 1717986"
+        },
+        {
+          "seq": 26752,
+          "ok": true,
+          "oom": null,
+          "peak_memory_bytes": 92054618112,
+          "error": null
+        },
+        {
+          "seq": 26816,
+          "ok": false,
+          "oom": true,
+          "peak_memory_bytes": null,
+          "error": "CUDA out of memory. Tried to allocate 42.86 GiB. GPU 0 has a total capacity of 23.99 GiB of which 0 bytes is free. Process 17832 has 17179869184.00 GiB memory in use. Process 25148 has 17179869184.00 GiB memory in use. Process 26032 has 17179869184.00 GiB memory in use. Process 26172 has 17179869184.00 GiB memory in use. Process 29156 has 17179869184.00 GiB memory in use. Process 29876 has 1717986"
+        }
+      ],
+      "note": "Bounds are the largest tested length that succeeded and the smallest tested length that OOM'd. Not a single-token boundary unless gap is 1."
+    }
+  },
+  "fused": {
+    "coarse": [
+      {
+        "ok": true,
+        "kind": "fused",
+        "seq": 512,
+        "peak_memory_bytes": 25297920,
+        "allocated_after_fwd_bytes": 25296896,
+        "allocated_before_bytes": 16908288,
+        "mean_latency_ms": 0.12672000098973513,
+        "std_latency_ms": 0.003970889618278968,
+        "reps": 80,
+        "warmup": 5,
+        "cv": 0.031335934242934765,
+        "out_shape": [
+          1,
+          32,
+          512,
+          64
+        ]
+      },
+      {
+        "ok": true,
+        "kind": "fused",
+        "seq": 1024,
+        "peak_memory_bytes": 33686528,
+        "allocated_after_fwd_bytes": 33685504,
+        "allocated_before_bytes": 16908288,
+        "mean_latency_ms": 0.30798079781234267,
+        "std_latency_ms": 0.013200511653528004,
+        "reps": 80,
+        "warmup": 5,
+        "cv": 0.042861476258566206,
+        "out_shape": [
+          1,
+          32,
+          1024,
+          64
+        ]
+      },
+      {
+        "ok": true,
+        "kind": "fused",
+        "seq": 2048,
+        "peak_memory_bytes": 50463744,
+        "allocated_after_fwd_bytes": 50462720,
+        "allocated_before_bytes": 16908288,
+        "mean_latency_ms": 1.0792704164981841,
+        "std_latency_ms": 0.2835488729663571,
+        "reps": 80,
+        "warmup": 5,
+        "cv": 0.2627227325347838,
+        "out_shape": [
+          1,
+          32,
+          2048,
+          64
+        ]
+      },
+      {
+        "ok": true,
+        "kind": "fused",
+        "seq": 4096,
+        "peak_memory_bytes": 84018176,
+        "allocated_after_fwd_bytes": 84017152,
+        "allocated_before_bytes": 16908288,
+        "mean_latency_ms": 2.611903202533722,
+        "std_latency_ms": 1.262915727644346,
+        "reps": 80,
+        "warmup": 5,
+        "cv": 0.4835231743730903,
+        "out_shape": [
+          1,
+          32,
+          4096,
+          64
+        ]
+      },
+      {
+        "ok": true,
+        "kind": "fused",
+        "seq": 8192,
+        "peak_memory_bytes": 151127040,
+        "allocated_after_fwd_bytes": 151126016,
+        "allocated_before_bytes": 16908288,
+        "mean_latency_ms": 4.404269582033157,
+        "std_latency_ms": 0.08524295345778525,
+        "reps": 80,
+        "warmup": 5,
+        "cv": 0.019354617575074565,
+        "out_shape": [
+          1,
+          32,
+          8192,
+          64
+        ]
+      },
+      {
+        "ok": true,
+        "kind": "fused",
+        "seq": 16384,
+        "peak_memory_bytes": 285344768,
+        "allocated_after_fwd_bytes": 285343744,
+        "allocated_before_bytes": 16908288,
+        "mean_latency_ms": 17.458978818810504,
+        "std_latency_ms": 0.28131693528899365,
+        "reps": 46,
+        "warmup": 5,
+        "cv": 0.016113023459648143,
+        "out_shape": [
+          1,
+          32,
+          16384,
+          64
+        ]
+      }
+    ],
+    "oom_bounds": {
+      "refined": false,
+      "reason": "no OOM up to seq=131072 (cap 131072)",
+      "largest_success": 131072,
+      "smallest_fail": null,
+      "probes": [
+        {
+          "ok": true,
+          "kind": "fused",
+          "seq": 32768,
+          "peak_memory_bytes": 553780224,
+          "allocated_after_fwd_bytes": 553779200,
+          "allocated_before_bytes": 16908288,
+          "mean_latency_ms": 68.93806966145833,
+          "std_latency_ms": 0.24112002516118866,
+          "reps": 3,
+          "warmup": 2,
+          "cv": 0.003497632387232236,
+          "out_shape": [
+            1,
+            32,
+            32768,
+            64
+          ]
+        },
+        {
+          "ok": true,
+          "kind": "fused",
+          "seq": 65536,
+          "peak_memory_bytes": 1090651136,
+          "allocated_after_fwd_bytes": 1090650112,
+          "allocated_before_bytes": 16908288,
+          "mean_latency_ms": 283.88625081380206,
+          "std_latency_ms": 3.603464183107083,
+          "reps": 3,
+          "warmup": 2,
+          "cv": 0.01269333816899275,
+          "out_shape": [
+            1,
+            32,
+            65536,
+            64
+          ]
+        },
+        {
+          "ok": true,
+          "kind": "fused",
+          "seq": 131072,
+          "peak_memory_bytes": 2164392960,
+          "allocated_after_fwd_bytes": 2164391936,
+          "allocated_before_bytes": 16908288,
+          "mean_latency_ms": 1132.5456949869792,
+          "std_latency_ms": 1.3952029106976898,
+          "reps": 3,
+          "warmup": 2,
+          "cv": 0.0012319175437011662,
+          "out_shape": [
+            1,
+            32,
+            131072,
+            64
+          ]
+        }
+      ],
+      "step": null
+    }
+  },
+  "speedups": [
+    {
+      "seq": 512,
+      "naive_ms": 0.1044356008991599,
+      "fused_ms": 0.12672000098973513,
+      "speedup": 0.8241445713658071,
+      "naive_peak_bytes": 50462720,
+      "fused_peak_bytes": 25297920
+    },
+    {
+      "seq": 1024,
+      "naive_ms": 0.454993999004364,
+      "fused_ms": 0.30798079781234267,
+      "speedup": 1.477345348269403,
+      "naive_peak_bytes": 159514624,
+      "fused_peak_bytes": 33686528
+    },
+    {
+      "seq": 2048,
+      "naive_ms": 1.8870432063937188,
+      "fused_ms": 1.0792704164981841,
+      "speedup": 1.7484433720665165,
+      "naive_peak_bytes": 578945024,
+      "fused_peak_bytes": 50463744
+    },
+    {
+      "seq": 4096,
+      "naive_ms": 7.231046408414841,
+      "fused_ms": 2.611903202533722,
+      "speedup": 2.768497087258149,
+      "naive_peak_bytes": 2223112192,
+      "fused_peak_bytes": 84018176
+    },
+    {
+      "seq": 8192,
+      "naive_ms": 28.674932547977992,
+      "fused_ms": 4.404269582033157,
+      "speedup": 6.510712392573547,
+      "naive_peak_bytes": 8732672000,
+      "fused_peak_bytes": 151127040
+    },
+    {
+      "seq": 16384,
+      "naive_ms": 918.1070434570313,
+      "fused_ms": 17.458978818810504,
+      "speedup": 52.58652599245107,
+      "naive_peak_bytes": 34636693504,
+      "fused_peak_bytes": 285344768
+    }
+  ],
+  "fused_kernel_explanation": "The fused / FlashAttention-style kernel never writes the S\u00d7S score matrix to HBM. It loads Q/K/V tiles into SRAM, computes local products, keeps a running softmax (m, l statistics) in on-chip memory, and writes only the output tile. That removes the O(S\u00b2) allocation that OOMs the naive path and the O(S\u00b2) memory traffic that makes naive attention bandwidth-bound."
+}
