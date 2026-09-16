@@ -13,7 +13,7 @@ SID4 / SEED. RTX 4090 on `ADS-R15-840-01`, UUID `GPU-5b052ad1-4272-40db-4b25-c93
 - Part C: elementwise add vs large GEMM, GB/s, which side of the roofline
 - Part D: I picked batch 1, 32 heads, head size 64. Naive vs fused sweep, OOM 26752 / 26816, quadratic fit, speedup table
 - Part E: 20 minute load, clock/temp plot, steady vs first 30 s
-- Part F Table HW2.5.1, GPU hours (3 h 20 min), conclusion
+- Part F Table HW2.5.1, GPU hours (2 h 1 min from the machine logs), conclusion
 
 **Where I took help (topics)**
 

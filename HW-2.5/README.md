@@ -7,7 +7,7 @@ HP_ID is reported only. No second hyperparameter model.
 
 Written report: [`HW2.5_Report.pdf`](HW2.5_Report.pdf)
 
-Ran on RTX 4090, hostname `ADS-R15-840-01`, UUID `GPU-5b052ad1-4272-40db-4b25-c930bf32b547`. Reservation: Monday 14 September 2026. Used: 3 h 20 min.
+Ran on RTX 4090, hostname `ADS-R15-840-01`, UUID `GPU-5b052ad1-4272-40db-4b25-c930bf32b547`. Reservation: Monday 14 September 2026. Used: 2 h 1 min (machine logs, 16:06–18:07 PDT).
 
 ## Files
 

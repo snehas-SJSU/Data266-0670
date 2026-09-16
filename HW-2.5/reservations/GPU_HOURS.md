@@ -13,9 +13,9 @@ Times below are from `results/NVIDIAGeForceRTX4090_5b052ad1/RUN_LOG.txt` and `nv
 | Reservation start (local) | Monday 14 September 2026 |
 | Reservation end (local) | Monday 14 September 2026 |
 | Hours reserved | Monday 14 September 2026 (same day) |
-| Login time | 2026-09-14; first script timestamp 16:06 PDT (Part A in RUN_LOG, 23:06 UTC) |
-| Logout time | 2026-09-14 ~18:39 PDT (leaving the lab after copy-off) |
-| Hours actually used | **3 h 20 min** at the workstation (writing/running scripts, smoke test, A–D, Part E restart, copy). Timed GPU jobs in RUN_LOG are ~2.0 h (16:06–18:07 PDT). |
+| Login time | 2026-09-14 16:06 PDT (first RUN_LOG block, 23:06 UTC) |
+| Logout time | 2026-09-14 18:07 PDT (last thermal sample / Part E finished, 01:07 UTC 15 Sep) |
+| Hours actually used | **2 h 1 min** from machine logs (16:06–18:07 PDT). First stamp: smoke-test Part A. Last stamp: Part E thermal end in `thermal_smi.csv` / RUN_LOG. |
 | GPU UUID (from `nvidia-smi -q` / Part A) | `GPU-5b052ad1-4272-40db-4b25-c930bf32b547` |
 | Job command | `run_quick.bat` then `run_full.bat` (`python scripts\run_all.py`) |
 | Notes (queue wait, reboot, someone else on the card) | Ran from Desktop\HW-2.5 on the lab Windows login. Smoke test first, then A–D. The first Part E window looked frozen, so I ran Part E again by itself. The committed log is that second run: 1202 s (20 min) BF16 GEMM N=8192. Same UUID. Driver in `nvidia-smi -q`: 595.95, CUDA 13.2, VRAM 24564 MiB, power limit 450.00 W. |
@@ -34,6 +34,6 @@ Breakdown from RUN_LOG (full run, UUID `GPU-5b052ad1-…`):
 
 | Card | Reserved (h) | Used (h) |
 |------|--------------|----------|
-| 4090 | Mon 14 Sep 2026 | **3 h 20 min** wall / ~2.0 h GPU jobs |
+| 4090 | Mon 14 Sep 2026 | **2 h 1 min** (16:06–18:07 PDT) |
 
-Reserved: Monday 14 September 2026. Used: **3 h 20 min**.
+Reserved: Monday 14 September 2026. Used: **2 h 1 min** (from `RUN_LOG.txt` and `thermal_smi.csv`).
