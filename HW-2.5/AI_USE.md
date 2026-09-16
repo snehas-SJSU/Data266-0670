@@ -40,10 +40,10 @@ naive OOM: largest ok=26752  smallest fail=26816  gap=64
 
 I ran Part D on the lab PC and opened the log. I expected a CUDA OOM at 16384. The line was `ok` with `peak=34.637 GB` and a 918 ms forward. nvidia-smi said 24564 MiB. The search kept going and died later: 26752 worked, 26816 failed.
 
-FP4 was a printed `ok=False` after FP8 had already worked. No kernel ran.
+FP4 printed `ok=False` after FP8 had already worked. No multiply ran.
 
 4. What did you change, and why does your version work?
 
 I ran it on the lab 4090 with `run_quick.bat` then `run_full.bat`. I did not rerun Part D to force an OOM at 16384. I reported 26752 and 26816, gap 64.
 
-FP8 ran (263.65 TFLOPS). I left the FP4 fail in the log. I did not invent FP4 TFLOPS.
+The assignment also asked: if a lower precision exists, try it. FP8 worked: 263.65 TFLOPS. FP4 did not — PyTorch had a name for it (`float4_e2m1fn_x2`) but no multiply I could run. I reported that fail. I did not make up an FP4 TFLOPS number.
