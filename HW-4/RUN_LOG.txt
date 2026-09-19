@@ -1,0 +1,28 @@
+DATA 266 HW4 — RUN_LOG
+Sneha Singh
+SID4=0670  SEED=670  SLICE=670  HP_ID=4  CLS_A=0  CLS_B=5
+HP_ID is reported only. No second hyperparameter model.
+
+device: cpu
+dataset: data/shakespeare.txt  (course week-4 file, 1738 chars)
+vocab_size: 49
+seq_len: 128
+n_embd=128  n_head=4  n_layer=2
+params: 425728
+optimizer: Adam lr=3e-4  batch=64
+epochs: 8  steps_per_epoch: 300  (assignment range 5–8)
+notebook: mini_gpt.ipynb (executed end-to-end; 12/12 code cells with outputs)
+
+epoch 1/8  train_loss=1.8486
+epoch 2/8  train_loss=0.1176
+epoch 3/8  train_loss=0.0202
+epoch 4/8  train_loss=0.0148
+epoch 5/8  train_loss=0.0131
+epoch 6/8  train_loss=0.0124
+epoch 7/8  train_loss=0.0120
+epoch 8/8  train_loss=0.0116
+
+prompt: ROMEO:
+sampling: greedy; temperature 0.2 / 0.7 / 1.2; top-k 5 / 50
+figures: figures/train_loss.png
+reference (not submitted): reference/Demo_4_Mini_GPT.ipynb
