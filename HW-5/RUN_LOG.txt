@@ -1,0 +1,48 @@
+DATA 266 HW5 — RUN_LOG
+Sneha Singh
+SID4=0670  SEED=670  SLICE=670  HP_ID=4  CLS_A=0  CLS_B=5
+HP_ID is reported only. Two trained models: LoRA r=4 and LoRA r=16.
+
+kernel: Python (HW1)
+notebook: lora_dialogsum.ipynb (executed; code cells have outputs)
+device: mps
+dataset: neil-code/dialogsum-test
+train subset: 256 (seed 670)
+held-out: dev_56, dev_357
+model: google/flan-t5-small
+epochs: 2  batch: 4  lr: 0.001
+lora alpha: 16  dropout: 0.05  targets: q, v
+
+# step 0
+SID4: 670
+SEED: 670
+SLICE: 670
+HP_ID: 4
+CLS_A: 0
+CLS_B: 5
+device: mps
+
+# baseline
+total params: 76,961,152
+dev_56: Li Na's mother has been building a fire under her since her neighbour's daughter got married.
+dev_357: Adam, I'm sorry. I'm sorry.
+
+# lora counts
+r=4   total 77,133,184   trainable 172,032 (0.223%)
+r=16  total 77,649,280   trainable 688,128 (0.886%)
+
+# train
+r=4   mean loss 1.7963   last logged 1.5108   saved adapters/r4
+r=16  mean loss 1.7933   last logged 1.4983   saved adapters/r16
+figures: figures/train_loss.png
+
+# after
+r=4  dev_56: Li Na's mother has been building a fire under her neighbour's daughter.
+r=4  dev_357: Alice's late getting off work for a start and then she misses the bus. Alice's boss asks Alice to do urgent letters.
+r=16 dev_56: Li Na's mother has been building a fire under Li Na's neighbour's daughter.
+r=16 dev_357: Adam is over an hour late. Alice is late getting off work for a start and then misses the bus. #Person1#'s boss asks Alice to do urgent letters.
+
+# overlap (unigram F1)
+baseline mean 0.097
+r=4   0.222, 0.286  mean 0.254
+r=16  0.143, 0.375  mean 0.259
