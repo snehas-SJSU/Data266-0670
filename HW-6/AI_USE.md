@@ -25,4 +25,4 @@ I read the loop before Run all. Classifier batches and two-view batches both hav
 
 4. What did you change, and why does your version work?
 
-The loop takes `contrastive=True` only for the SimCLR loader. Classifier steps still use cross-entropy. The linear probe sets the encoder to eval and blocks its gradients, so only the linear layer updates. The Colab run then printed A 0.3149, B 0.3957, C 0.4467.
+The loop takes `contrastive=True` only for the SimCLR loader. Classifier steps still use cross-entropy. The linear probe sets the encoder to eval and blocks its gradients, so only the linear layer updates. The Colab run then printed A 0.3426, B 0.4260, C 0.4980.

@@ -7,7 +7,7 @@ Findings: [`report.pdf`](report.pdf)
 
 HP_ID is reported only. No second hyperparameter network. The three models are supervised, rotation SSL, and SimCLR.
 
-Test accuracy: supervised 0.3149, rotation 0.3957, SimCLR 0.4467. Run on Colab GPU.
+Test accuracy: supervised 0.3426, rotation 0.4260, SimCLR 0.4980. Run on Colab GPU. SimCLR uses the four Demo 6 augmentations.
 
 ## Files
 
