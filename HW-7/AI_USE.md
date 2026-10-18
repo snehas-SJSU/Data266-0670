@@ -28,4 +28,4 @@ I opened `latent_interpolation.png` and compared it with that row. The VAE row s
 
 4. What did you change, and why does your version work?
 
-I rewrote both claims in the notebook, the report, and `METRICS.md` to say only what the figures show. I also labeled the rows in the figures, which had no labels, so a reader can tell which row is which model. The notebook was then run top to bottom, and its test numbers (FC-AE BCE 213.6070, VAE 226.8435, KL 13.0439) matched a separate run of `train_eval.py`.
+I rewrote both claims in the notebook, the report, and `METRICS.md` so they say only what the figures show. I also added row labels to the figures, since they had none. My version works because each sentence can be checked against a figure or a printed number: the notebook ran top to bottom, and its test numbers (FC-AE BCE 213.6070, VAE 226.8435, KL 13.0439) matched a separate run of `train_eval.py`.
