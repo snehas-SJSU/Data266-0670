@@ -1,0 +1,84 @@
+DATA 266 HW7 — RUN_LOG
+Sneha Singh
+SID4=0670  SEED=670  SLICE=670  HP_ID=4  CLS_A=0  CLS_B=5
+HP_ID is reported only. Two trained models: Fully Connected AutoEncoder (FC-AE) and Variational AutoEncoder (VAE).
+
+notebook: autoencoders_fashionmnist.ipynb (executed top to bottom)
+device: mps (Apple Silicon GPU)
+dataset: FashionMNIST (28x28 grayscale, 10 classes)
+train size: 60000
+test size: 10000
+latent_dim: 20
+batch_size: 128
+epochs: 20
+optimizer: Adam lr 0.001
+loss: BCE (summed over 784 pixels per image)
+
+# Model 1: Fully Connected AutoEncoder (FC-AE)
+FC-AE architecture: 784 -> 512 -> 128 -> 20 -> 128 -> 512 -> 784 (Sigmoid)
+FC-AE trainable parameters: 941092
+FC-AE epoch 01  train loss (BCE): 267.6440
+FC-AE epoch 02  train loss (BCE): 233.2876
+FC-AE epoch 03  train loss (BCE): 226.7644
+FC-AE epoch 04  train loss (BCE): 223.2539
+FC-AE epoch 05  train loss (BCE): 220.9310
+FC-AE epoch 06  train loss (BCE): 219.3732
+FC-AE epoch 07  train loss (BCE): 218.0053
+FC-AE epoch 08  train loss (BCE): 216.9013
+FC-AE epoch 09  train loss (BCE): 215.8585
+FC-AE epoch 10  train loss (BCE): 215.0799
+FC-AE epoch 11  train loss (BCE): 214.3796
+FC-AE epoch 12  train loss (BCE): 213.8505
+FC-AE epoch 13  train loss (BCE): 213.3524
+FC-AE epoch 14  train loss (BCE): 212.8898
+FC-AE epoch 15  train loss (BCE): 212.4944
+FC-AE epoch 16  train loss (BCE): 212.2057
+FC-AE epoch 17  train loss (BCE): 211.9399
+FC-AE epoch 18  train loss (BCE): 211.6879
+FC-AE epoch 19  train loss (BCE): 211.5006
+FC-AE epoch 20  train loss (BCE): 211.3226
+FC-AE training time: 109.43s
+
+# Model 2: Variational AutoEncoder (VAE)
+VAE architecture: 784 -> 512 -> 128 -> (fc_mu: 20, fc_logvar: 20) -> reparam -> 128 -> 512 -> 784 (Sigmoid)
+VAE trainable parameters: 943672
+VAE epoch 01  total: 291.3547  recon: 279.8671  kl: 11.4876
+VAE epoch 02  total: 257.3314  recon: 245.4273  kl: 11.9040
+VAE epoch 03  total: 249.8804  recon: 238.4530  kl: 11.4274
+VAE epoch 04  total: 246.6321  recon: 235.1694  kl: 11.4627
+VAE epoch 05  total: 244.9271  recon: 233.3050  kl: 11.6220
+VAE epoch 06  total: 243.5793  recon: 231.7142  kl: 11.8651
+VAE epoch 07  total: 242.3304  recon: 230.1217  kl: 12.2088
+VAE epoch 08  total: 241.4803  recon: 229.0800  kl: 12.4003
+VAE epoch 09  total: 240.7942  recon: 228.2943  kl: 12.4999
+VAE epoch 10  total: 240.2846  recon: 227.6862  kl: 12.5984
+VAE epoch 11  total: 239.8174  recon: 227.1651  kl: 12.6523
+VAE epoch 12  total: 239.4905  recon: 226.7802  kl: 12.7103
+VAE epoch 13  total: 239.1817  recon: 226.4351  kl: 12.7465
+VAE epoch 14  total: 238.9322  recon: 226.1286  kl: 12.8036
+VAE epoch 15  total: 238.6279  recon: 225.8245  kl: 12.8035
+VAE epoch 16  total: 238.4806  recon: 225.6174  kl: 12.8632
+VAE epoch 17  total: 238.2579  recon: 225.3797  kl: 12.8782
+VAE epoch 18  total: 238.0735  recon: 225.1811  kl: 12.8924
+VAE epoch 19  total: 237.9359  recon: 225.0122  kl: 12.9237
+VAE epoch 20  total: 237.7973  recon: 224.8707  kl: 12.9265
+VAE training time: 115.63s
+
+# Quantitative test set evaluation (10000 images)
+FC-AE Test BCE Loss (per image): 213.6070
+FC-AE Test MSE Loss (per pixel): 0.009739
+VAE Test Recon BCE (per image):  226.8435
+VAE Test Recon MSE (per pixel):  0.015663
+VAE Test KL Divergence:          13.0439
+VAE Total Test Loss (BCE + KL):  239.8874
+
+# Saved checkpoints
+checkpoints/fc_ae.pt (3.77 MB)
+checkpoints/vae.pt   (3.78 MB)
+
+# Saved figures
+figures/loss_curves.png
+figures/reconstructions_comparison.png
+figures/random_generation.png
+figures/latent_interpolation.png
+figures/latent_tsne.png
