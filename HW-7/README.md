@@ -15,6 +15,7 @@ Test reconstruction BCE: FC-AE 213.6070, VAE 226.8435. VAE test KL 13.0439. Run 
 |------|------|
 | `autoencoders_fashionmnist.ipynb` | GAN questions, then FC-AE and VAE, executed |
 | `HW7_Report.pdf` | Findings |
+| `train_eval.py` | Same training and figures as the notebook, as a script. Run it from `HW-7/`. |
 | `checkpoints/` | Saved weights for both models |
 | `figures/loss_curves.png` | Training loss vs epoch |
 | `figures/reconstructions_comparison.png` | One test image per class, original / FC-AE / VAE |
