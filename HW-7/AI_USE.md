@@ -16,26 +16,16 @@ I used an assistant for the closed-form KL term in the VAE loss and for the t-SN
 
 2. Give one specific thing it produced that was wrong. Paste the wrong output.
 
-In the VAE loss calculation, the initial code summed the binary cross-entropy reconstruction error across pixels and batch, but divided the KL divergence by the batch size twice:
+The first draft of my metrics table said the VAE interpolates smoothly and the FC-AE does not:
 
-```python
-recon_loss = F.binary_cross_entropy(recon_x, x.view(-1, 784), reduction="sum")
-kl_div = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp()) / x.size(0)
-total_loss = (recon_loss + kl_div) / x.size(0)
+```
+| Latent Interpolation Quality | Discrete jumps / Voids | **Smooth semantic transitions** | VAE manifold is dense and continuous |
 ```
 
 3. How did you find out? What did the failure look like?
 
-During the first test epoch, the total loss was ~2.1 instead of ~270, because `recon_loss` had already been averaged by `x.size(0)` during the outer division while `kl_div` was divided by `x.size(0)` twice ($128^2$). The KL penalty was effectively scaled down by $1/128$, leading to posterior collapse and unregularized latent coordinates.
+I opened `latent_interpolation.png` and compared it with that row. The VAE row stays shirt-shaped and fades until about α=0.8, then is a sandal by α=0.9. The FC-AE row fades slowly through a smudge. Neither row has a clean in-between item. The same draft also said the VAE t-SNE clusters were better, and the two plots look about the same.
 
 4. What did you change, and why does your version work?
 
-I normalized both the reconstruction loss and the analytical KL divergence consistently by the batch size (`/ x.size(0)`), ensuring both terms are measured on a per-sample scale (summed over 784 pixels and 20 latent dimensions respectively):
-
-```python
-recon_loss = F.binary_cross_entropy(recon_x, x.view(-1, 784), reduction="sum") / x.size(0)
-kl_div = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp()) / x.size(0)
-total_loss = recon_loss + kl_div
-```
-
-This properly balances pixel fidelity with latent Gaussian regularization, yielding a stable KL divergence of 13.04 and clear generative samples when decoding $z \sim \mathcal{N}(0, I)$.
+I rewrote both claims in the notebook, the report, and `METRICS.md` to say only what the figures show. I also labeled the rows in the figures, which had no labels, so a reader can tell which row is which model. The notebook was then run top to bottom, and its test numbers (FC-AE BCE 213.6070, VAE 226.8435, KL 13.0439) matched a separate run of `train_eval.py`.
