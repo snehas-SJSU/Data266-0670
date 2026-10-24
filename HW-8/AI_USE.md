@@ -1,7 +1,5 @@
 # AI Use
 
-This file records AI assistance for Homework 8.
+I used AI assistance to organize the notebook sections, check the DDPM/DDIM equations, and add comments around the implementation.
 
-- AI assistance was used to organize the notebook structure and check the DDPM/DDIM implementation plan.
-- The final training results, loss values, generated images, and discussion must come from my executed notebook.
-- Any changes made after running the notebook will be recorded here.
+The training loss, generated images, sampling times, and final discussion must come from my executed notebook. I will record any additional AI assistance or changes here.

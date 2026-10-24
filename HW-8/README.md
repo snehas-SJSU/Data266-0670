@@ -7,13 +7,14 @@ SID4 = 0670 | SEED = 670 | SLICE = 670 | HP_ID = 4 | CLS_A = 0 | CLS_B = 5
 
 Notebook: `mini_diffusion.ipynb`. Dataset: MNIST.
 
-Configuration:
+I use `T = 100`, a linear β schedule from `0.0001` to `0.02`, batch size `128`, and 50 planned training epochs. The CNN has five convolutional layers, ReLU activations, timestep conditioning, and the same input/output image shape.
 
-- Diffusion steps: `T = 100`
-- Noise schedule: linear β from `0.0001` to `0.02`
-- Batch size: `128`
-- Epochs: `50`
-- Model: small timestep-conditioned CNN with five convolutional layers
-- Training target: the Gaussian noise added to the image
+The notebook is split into the same kind of sections as my earlier homework:
 
-The notebook contains the forward diffusion visualization, training loss, DDPM sampling, DDIM sampling with 50 and 20 steps, and a comparison of the generated images.
+1. forward diffusion and the noisy-image figure;
+2. model setup and noise-prediction training;
+3. DDPM sampling with all 100 reverse steps;
+4. DDIM sampling with 50 and 20 steps;
+5. comparison and discussion.
+
+The code cells include comments explaining what each block is doing. The report will use only results from the executed notebook.
