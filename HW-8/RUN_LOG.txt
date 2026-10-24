@@ -1,5 +1,19 @@
 DATA 266 Homework 8 run log
 
-Notebook structure and commented implementation prepared.
-Forward diffusion output was generated locally.
-Full 50-epoch training and DDPM/DDIM sampling results are still pending.
+Device: MPS
+T: 100
+Batch size: 128
+Epochs: 50
+Model parameters: 97,537
+Epoch 1 loss: 0.164547
+Epoch 50 loss: 0.061000
+
+Generated:
+- figures/forward_diffusion.png
+- figures/train_loss.png
+- figures/ddpm_vs_ddim.png
+- outputs/ddpm_100_steps.png
+- outputs/ddim_50_steps.png
+- outputs/ddim_20_steps.png
+
+The generated samples were still noisy and mostly loose digit-like strokes. DDIM used fewer reverse steps, but it was not clearly better in image quality on this run.
