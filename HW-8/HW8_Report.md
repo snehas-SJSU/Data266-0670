@@ -9,7 +9,7 @@ Same SID/SEED as the earlier homework. I did not train a second HP_ID network. T
 
 ## 1. Forward diffusion
 
-I used `T = 100` diffusion steps and a linear β schedule from `0.0001` to `0.02`. The closed-form forward process was:
+I used `T = 100` diffusion steps. In the code, `BETA_START = 0.0001` and `BETA_END = 0.02`, with β increasing linearly between them. The closed-form forward process was:
 
 \[
 x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon,

@@ -7,7 +7,7 @@ SID4 = 0670 | SEED = 670 | SLICE = 670 | HP_ID = 4 | CLS_A = 0 | CLS_B = 5
 
 Notebook: `mini_diffusion.ipynb`. Dataset: MNIST.
 
-I use `T = 100`, a linear β schedule from `0.0001` to `0.02`, batch size `128`, and 50 planned training epochs. The CNN has five convolutional layers, ReLU activations, timestep conditioning, and the same input/output image shape.
+I use `T = 100`, `BETA_START = 0.0001`, and `BETA_END = 0.02` with a linear β schedule. Batch size is `128` and the planned run is 50 epochs. The CNN has five convolutional layers, ReLU activations, timestep conditioning, and the same input/output image shape.
 
 The notebook is split into the same kind of sections as my earlier homework:
 

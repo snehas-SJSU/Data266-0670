@@ -2,6 +2,8 @@ DATA 266 Homework 8 run log
 
 Device: MPS
 T: 100
+BETA_START: 0.0001
+BETA_END: 0.02
 Batch size: 128
 Epochs: 50
 Model parameters: 97,537
