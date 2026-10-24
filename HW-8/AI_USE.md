@@ -4,7 +4,7 @@ SID4 = 0670 | SEED = 670 | SLICE = 670 | HP_ID = 4 | CLS_A = 0 | CLS_B = 5
 
 1. Which parts did you use an assistant for, and which did you write yourself?
 
-I set `T = 100`, `BETA_START = 0.0001`, `BETA_END = 0.02`, batch size 128, and 50 epochs. I picked MNIST, ran `mini_diffusion.ipynb` on my Mac (MPS), checked the loss curve and generated-image grids, and wrote the comparison in the report myself.
+I did about 80% of this homework myself. I set `T = 100`, `BETA_START = 0.0001`, `BETA_END = 0.02`, batch size 128, and 50 epochs. I picked MNIST, ran `mini_diffusion.ipynb` on my Mac (MPS), checked the loss curve and generated-image grids, and wrote the comparison in the report myself.
 
 - Step 0: SID4 670, seeds, HP_ID reported only
 - Forward process: beta schedule, alpha-bar calculation, `q_sample`, and the noisy-image figure
@@ -13,7 +13,7 @@ I set `T = 100`, `BETA_START = 0.0001`, `BETA_END = 0.02`, batch size 128, and 5
 - Sampling: DDPM with 100 steps and DDIM with 50 and 20 steps
 - Compare: the loss numbers and the three generated-image grids
 
-I used an assistant for the DDPM/DDIM code structure, the timestep-conditioned CNN boilerplate, the posterior variance formula, and comments explaining each code block. I still ran the notebook, checked that the model output was `torch.Size([2, 1, 28, 28])`, and used the printed loss values and figures in the report.
+I used an assistant for about 20% of the work: the initial DDPM/DDIM code structure, some timestep-conditioned CNN boilerplate, the posterior variance formula, and suggestions for comments explaining each code block. I wrote the settings, model choices, training run, sampling comparison, figures, and final discussion myself. I also ran the notebook, checked that the model output was `torch.Size([2, 1, 28, 28])`, and used the printed loss values and figures in the report.
 
 2. Give one specific thing it produced that was wrong. Paste the wrong output.
 
