@@ -1,21 +1,41 @@
-DATA 266 Homework 8 run log
+DATA 266 HW8 — RUN_LOG
+Sneha Singh
+SID4=0670  SEED=670  SLICE=670  HP_ID=4  CLS_A=0  CLS_B=5
+HP_ID is reported only. One timestep-conditioned CNN is used for DDPM and DDIM sampling.
 
-Device: MPS
-T: 100
-BETA_START: 0.0001
-BETA_END: 0.02
-Batch size: 128
-Epochs: 50
-Model parameters: 97,537
-Epoch 1 loss: 0.164547
-Epoch 50 loss: 0.061000
+notebook: mini_diffusion.ipynb (executed top to bottom)
+device: mps (Apple Silicon GPU)
+dataset: MNIST (28x28 grayscale)
+diffusion_steps: 100
+beta_start: 0.0001
+beta_end: 0.02
+batch_size: 128
+epochs: 50
+optimizer: Adam lr 0.001
+loss: noise-prediction MSE
 
-Generated:
-- figures/forward_diffusion.png
-- figures/train_loss.png
-- figures/ddpm_vs_ddim.png
-- outputs/ddpm_100_steps.png
-- outputs/ddim_50_steps.png
-- outputs/ddim_20_steps.png
+# Model
+CNN: five convolutional layers, ReLU activations, timestep conditioning, one output channel
+trainable parameters: 97537
+model output shape: (2, 1, 28, 28)
+
+# Training
+epoch 01  train loss: 0.164547
+epoch 50  train loss: 0.061000
+
+# Sampling
+DDPM reverse steps: 100
+DDIM reverse steps: 50 and 20
+DDIM eta: 0 (deterministic for the same starting noise)
+
+# Saved figures
+figures/forward_diffusion.png
+figures/train_loss.png
+figures/ddpm_vs_ddim.png
+
+# Saved outputs
+outputs/ddpm_100_steps.png
+outputs/ddim_50_steps.png
+outputs/ddim_20_steps.png
 
 The generated samples were still noisy and mostly loose digit-like strokes. DDIM used fewer reverse steps, but it was not clearly better in image quality on this run.
