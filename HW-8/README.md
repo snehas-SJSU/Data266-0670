@@ -3,7 +3,7 @@
 Sneha Singh  
 SID4 = 0670 | SEED = 670 | SLICE = 670 | HP_ID = 4 | CLS_A = 0 | CLS_B = 5
 
-Findings: [`HW8_Report.md`](HW8_Report.md)
+Findings: [`HW8_Report.pdf`](HW8_Report.pdf)
 
 ## Mini Diffusion Model (DDPM → DDIM)
 
@@ -28,7 +28,7 @@ The code cells include comments explaining what each block is doing. The report 
 | File | Role |
 |------|------|
 | `mini_diffusion.ipynb` | Executed notebook with forward diffusion, training, DDPM, and DDIM |
-| `HW8_Report.md` | Findings and discussion |
+| `HW8_Report.pdf` | Findings and discussion |
 | `figures/forward_diffusion.png` | Forward-noise visualization |
 | `figures/train_loss.png` | Training loss curve |
 | `figures/ddpm_vs_ddim.png` | DDPM versus DDIM comparison |
