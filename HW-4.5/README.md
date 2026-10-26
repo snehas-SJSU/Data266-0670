@@ -19,7 +19,6 @@ I ran the notebook on Colab Pro with an L4. The report uses only numbers from th
 |------|------|
 | `hw4.5.ipynb` | Executed Colab notebook (L4) |
 | `HW4.5_Report.pdf` | Findings and discussion |
-| `HW4.5_Report.md` | Report source |
 | `data/twitter_slice.jsonl` | Frozen 5,000-row slice |
 | `figures/baseline_loss.png` | Train / val loss |
 | `figures/confusion.png` | Test confusion matrix |
