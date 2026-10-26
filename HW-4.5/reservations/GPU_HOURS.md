@@ -12,7 +12,7 @@ Times below are from the Colab Pro L4 run of `hw4.5.ipynb` on 26 October 2026. L
 |-------|-------|
 | Lab / hostname | Google Colab Pro |
 | GPU name | NVIDIA L4 |
-| GPU UUID (from `nvidia-smi -q`) | not captured in the notebook (Step 0 printed the device name only) |
+| GPU UUID (from `nvidia-smi -q`) | not printed in this run; device name `NVIDIA L4` (see `results/GPU_CAPTURE.md`) |
 | Reservation start (local) | Monday 26 October 2026 |
 | Reservation end (local) | Monday 26 October 2026 |
 | Hours reserved | Colab Pro session, same day |

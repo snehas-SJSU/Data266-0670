@@ -53,17 +53,18 @@ Train wall-clock: 113.1 s.
 
 Worst class: negative.
 
-## Serving
+## Table HW4.1 — Serving comparison (L4)
 
-| Setup | Tokens/s | p50 (ms) | p95 (ms) |
-|-------|---------:|---------:|---------:|
+| Configuration | Tokens/sec | p50 latency (ms) | p95 latency (ms) |
+|---------------|----------:|-----------------:|-----------------:|
 | HF pipeline, batch 1 | 115.7 | 269.3 | 280.8 |
-| vLLM batch 1 (HW4.a) | 97.8 | 319.1 | 328.4 |
-| vLLM batch 8 (HW4.a) | 627.8 | 349.2 | 354.9 |
-| vLLM batch 32 (HW4.a) | 2273.5 | 383.7 | 386.5 |
-| vLLM batch 1 (HW4.5) | 97.9 | 320.4 | 325.3 |
-| vLLM batch 8 (HW4.5) | 622.9 | 348.8 | 355.4 |
-| vLLM batch 32 (HW4.5) | 2354.5 | 368.4 | 378.6 |
+| vLLM, batch 1 | 97.8 | 319.1 | 328.4 |
+| vLLM, batch 8 | 627.8 | 349.2 | 354.9 |
+| vLLM, batch 32 | 2273.5 | 383.7 | 386.5 |
+
+Part D re-run (same L4): vLLM batch 1 / 8 / 32 → 97.9 / 622.9 / 2354.5 tok/s; p50 320.4 / 348.8 / 368.4 ms. Nearly identical to HW4.a (same hardware and precision).
+
+Latency vs throughput: at batch 8, p50 is worse than HF batch 1 while tokens/s is still rising. Interactive apps care about p50.
 
 ## Part A
 
@@ -90,7 +91,18 @@ Largest batch: 256. Fastest batch: 256 (121.0 samp/s). Throughput within 5% of p
 | 8-bit optimiser | 256 | 99.3 | 1.90 | 0.7187 |
 | Best combination | 256 | 222.0 | 1.64 | 0.7160 |
 
-Apply first: 8-bit optimiser.  
+Checkpointing throughput drop at batch 16: 92.8 → 70.7 samp/s (−23.8%).  
+Accumulation: effective batch 128; same optimiser-step wall-clock 816.9 s (baseline train 113.1 s).
+
+Ranking by memory saved per unit throughput lost (batch-16 peaks):
+
+| Rank | Technique | Saved GB | Δ samp/s | Saved GB / samp/s lost |
+|-----:|-----------|---------:|---------:|-----------------------:|
+| 1 | 8-bit optimiser | 0.58 | +6.5 | free — apply first |
+| 2 | Mixed precision | 0.22 | +96.5 | free |
+| 3 | Gradient accumulation | 0.16 | +6.7 | free |
+| 4 | Gradient checkpointing | 0.39 | −22.1 | 0.018 |
+
 Not worth on a 32 GB card for this BERT run: gradient checkpointing.  
 Combination flags: AMP + 8-bit AdamW.
 
@@ -113,4 +125,5 @@ Part C skipped (optional).
 | 32768 | 9.02 |
 | 65536 | 18.02 |
 
-No OOM in this ladder on the L4.
+Longest context at batch 8 that fit: 65536 (no allocation OOM on this L4 ladder).  
+GPU captures: `results/GPU_CAPTURE.md` (training + serving on the same NVIDIA L4).

@@ -19,6 +19,7 @@ I ran the notebook on Colab Pro with an L4. The report uses only numbers from th
 |------|------|
 | `hw4.5.ipynb` | Executed Colab notebook (L4) |
 | `HW4.5_Report.pdf` | Findings and discussion |
+| `HW4.5_Report.md` | Report source |
 | `data/twitter_slice.jsonl` | Frozen 5,000-row slice |
 | `figures/baseline_loss.png` | Train / val loss |
 | `figures/confusion.png` | Test confusion matrix |
@@ -27,3 +28,4 @@ I ran the notebook on Colab Pro with an L4. The report uses only numbers from th
 | `checkpoints/bert_baseline/` | Best validation-loss BERT only |
 | `METRICS.md` / `RUN_LOG.txt` / `AI_USE.md` | Standing notes |
 | `reservations/GPU_HOURS.md` | Colab L4 session record |
+| `results/GPU_CAPTURE.md` | Training + serving GPU captures (one L4) |
