@@ -1,0 +1,125 @@
+DATA 266 HW4.5 — RUN_LOG
+Sneha Singh
+SID4=0670  SEED=670  SLICE=670  HP_ID=4  CLS_A=0  CLS_B=5
+Part C skipped (optional). One GPU.
+
+notebook: hw4.5.ipynb (executed top to bottom on Colab Pro)
+device: cuda
+GPU: NVIDIA L4
+Drive folder: /content/drive/MyDrive/HW-4.5
+
+# Data
+dataset: cardiffnlp/tweet_eval sentiment, train split
+rows: 670-5669 inclusive (n=5000)
+split: 3500 / 750 / 750 with SEED 670
+slice counts: negative 773, neutral 2290, positive 1937
+
+# HW4.a baseline (bert-base-uncased, batch 16, 3 epochs)
+baseline seconds=113.1370  peak_gb=2.4768  test_acc=0.7267
+epoch 1 train=0.8892 val=0.7410 acc=0.6640 seconds=37.0
+epoch 2 train=0.5950 val=0.7395 acc=0.6773 seconds=37.8
+epoch 3 train=0.3922 val=0.7976 acc=0.6813 seconds=38.3
+best_val_loss_epoch=2
+worst_class=negative
+reload positive: I love this, it made my whole day.
+reload negative: This is the worst update they have shipped.
+reload neutral: The package arrived today.
+checkpoint: checkpoints/bert_baseline/ (best val-loss state only)
+
+# Serving (facebook/opt-125m, 32 new tokens)
+HF pipeline batch 1  tokens/s=115.67  p50_ms=269.32  p95_ms=280.81
+vLLM hw4a batch 1   tokens/s=97.78   p50_ms=319.12  p95_ms=328.38
+vLLM hw4a batch 8   tokens/s=627.79  p50_ms=349.15  p95_ms=354.87
+vLLM hw4a batch 32  tokens/s=2273.50 p50_ms=383.70  p95_ms=386.48
+vLLM hw45 batch 1   tokens/s=97.86   p50_ms=320.35  p95_ms=325.29
+vLLM hw45 batch 8   tokens/s=622.89  p50_ms=348.85  p95_ms=355.37
+vLLM hw45 batch 32  tokens/s=2354.48 p50_ms=368.38  p95_ms=378.61
+
+# Part A
+part A batch 8    70.5 samp/s  2.09 GB  49.7s
+part A batch 16   92.5 samp/s  2.49 GB  37.8s
+part A batch 32  106.5 samp/s  3.76 GB  32.9s
+part A batch 64  110.6 samp/s  6.15 GB  31.7s
+part A batch 128 119.6 samp/s 11.00 GB  29.3s
+part A batch 256 121.0 samp/s 20.65 GB  28.9s
+part A batch 512 out of memory
+largest_batch=256  fastest_batch=256
+
+# Part B
+amp         max_batch=256   samp/s=189.3  peak=2.26  acc=0.7040
+checkpoint  max_batch=1024  samp/s=70.7   peak=2.09  acc=0.7267
+adam8bit    max_batch=256   samp/s=99.3   peak=1.90  acc=0.7187
+accum       effective=128   samp/s=99.5   peak=2.32  acc=0.6520  same_steps_seconds=816.9
+combo       flags={amp:True, adam8bit:True, checkpoint:False}
+            max_batch=256   samp/s=222.0  peak=1.64  acc=0.7160
+apply_first=8-bit optimiser
+not_worth_32gb=Gradient checkpointing
+
+# Part C
+Part C skipped (optional).
+
+# Part D KV tensors (batch 8, OPT-125m)
+kv context 128   peak 0.05 GB
+kv context 256   peak 0.09 GB
+kv context 512   peak 0.16 GB
+kv context 1024  peak 0.30 GB
+kv context 2048  peak 0.58 GB
+kv context 4096  peak 1.14 GB
+kv context 8192  peak 2.27 GB
+kv context 16384 peak 4.52 GB
+kv context 32768 peak 9.02 GB
+kv context 65536 peak 18.02 GB
+
+# Part E
+gpu-hours 0.0314 (= 113.1 / 3600)
+choice: Best combination  222.0 samp/s  1.64 GB  47.3 s  acc=0.7160
+
+# Saved figures
+figures/baseline_loss.png
+figures/confusion.png
+figures/part_a_throughput.png
+figures/kv_cache.png
+
+===== 2026-10-26 22:35:30 UTC  notebook =====
+baseline seconds=113.13704028099983 peak_gb=2.4768271446228027 test_acc=0.7266666666666667
+epoch 1 train=0.8892 val=0.7410369749069214 acc=0.664 seconds=37.0
+epoch 2 train=0.5950 val=0.7394668963750204 acc=0.6773333333333333 seconds=37.8
+epoch 3 train=0.3922 val=0.7976047325134278 acc=0.6813333333333333 seconds=38.3
+misclassified 1: Labeled negative, predicted neutral: the wording is closer to a neutral tweet than a clear negative one.
+misclassified 2: Labeled negative, predicted neutral: a negation flips the polarity, and the model missed it.
+misclassified 3: Labeled negative, predicted neutral: the wording is closer to a neutral tweet than a clear negative one.
+misclassified 4: Labeled negative, predicted neutral: the tweet changes direction mid-sentence.
+misclassified 5: Labeled negative, predicted neutral: the wording is closer to a neutral tweet than a clear negative one.
+reload positive: I love this, it made my whole day.
+reload negative: This is the worst update they have shipped.
+reload neutral: The package arrived today.
+HF pipeline batch 1  {"tokens_per_sec": 115.66951114356566, "p50_ms": 269.31953849998536, "p95_ms": 280.81388469945523, "n": 32}
+vLLM hw4a batch 1  {"tokens_per_sec": 97.77896359903848, "p50_ms": 319.1171024996038, "p95_ms": 328.3780902500439, "n": 32}
+vLLM hw4a batch 8  {"tokens_per_sec": 627.7876585577313, "p50_ms": 349.1526440002417, "p95_ms": 354.8725029995694, "n": 64}
+vLLM hw4a batch 32  {"tokens_per_sec": 2273.497231108878, "p50_ms": 383.69950599962976, "p95_ms": 386.47891899927345, "n": 128}
+vLLM hw45 batch 1  {"tokens_per_sec": 97.86471926282418, "p50_ms": 320.3501919997507, "p95_ms": 325.28681964959105, "n": 32}
+vLLM hw45 batch 8  {"tokens_per_sec": 622.89173822736, "p50_ms": 348.8491900002373, "p95_ms": 355.3676940000514, "n": 64}
+vLLM hw45 batch 32  {"tokens_per_sec": 2354.47956971952, "p50_ms": 368.3791339999516, "p95_ms": 378.609356999732, "n": 128}
+part A batch 8  70.5 samp/s  2.09 GB  49.7s
+part A batch 16  92.5 samp/s  2.49 GB  37.8s
+part A batch 32  106.5 samp/s  3.76 GB  32.9s
+part A batch 64  110.6 samp/s  6.15 GB  31.7s
+part A batch 128  119.6 samp/s  11.00 GB  29.3s
+part A batch 256  121.0 samp/s  20.65 GB  28.9s
+part A batch 512 out of memory
+amp max_batch=256 samp/s=189.3168024983808 peak=2.260280132293701 acc=0.704
+checkpoint max_batch=1024 samp/s=70.6853206668266 peak=2.0878524780273438 acc=0.7266666666666667
+8-bit max_batch=256 samp/s=99.27705440234733 peak=1.8966383934020996 acc=0.7186666666666667
+accum effective 128 same-step seconds=816.8813488930009 acc=0.652
+combo {'amp': True, 'adam8bit': True, 'checkpoint': False} samp/s=221.96962106591837 peak=1.642249584197998 acc=0.716
+kv context 128 peak 0.05 GB
+kv context 256 peak 0.09 GB
+kv context 512 peak 0.16 GB
+kv context 1024 peak 0.30 GB
+kv context 2048 peak 0.58 GB
+kv context 4096 peak 1.14 GB
+kv context 8192 peak 2.27 GB
+kv context 16384 peak 4.52 GB
+kv context 32768 peak 9.02 GB
+kv context 65536 peak 18.02 GB
+gpu-hours 0.0314 choice Best combination

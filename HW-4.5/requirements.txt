@@ -1,0 +1,10 @@
+# Use the CUDA PyTorch that is already on the lab / Colab / Kaggle machine.
+# Do not pip-install a CPU or Mac wheel of torch over it.
+transformers>=4.40
+datasets>=2.18
+accelerate>=0.30
+bitsandbytes>=0.43
+matplotlib>=3.7
+numpy>=1.24
+sentencepiece
+protobuf

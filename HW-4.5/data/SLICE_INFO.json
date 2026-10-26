@@ -1,0 +1,25 @@
+{
+  "dataset": "cardiffnlp/tweet_eval",
+  "config": "sentiment",
+  "source_split": "train",
+  "source_rows": 45615,
+  "row_start": 670,
+  "row_end_exclusive": 5670,
+  "row_end_inclusive": 5669,
+  "n_rows": 5000,
+  "label_names": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "label_counts": {
+    "neutral": 2290,
+    "positive": 1937,
+    "negative": 773
+  },
+  "seed": 670,
+  "n_train": 3500,
+  "n_val": 750,
+  "n_test": 750,
+  "note": "Consecutive rows from the train split, starting at SLICE. The official tweet_eval validation and test splits are not used. The 70/15/15 split is recomputed from SEED on these rows and is not reshuffled."
+}
