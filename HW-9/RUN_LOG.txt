@@ -1,0 +1,108 @@
+DATA 266 HW9 — RUN_LOG
+Sneha Singh
+SID4=0670  SEED=670  SLICE=670  HP_ID=4  CLS_A=0  CLS_B=5
+HP_ID is reported only. One frozen pretrained VAE and one conditional U-Net.
+
+notebook: latent_diffusion.ipynb (executed top to bottom)
+device: mps (Apple Silicon GPU)
+torch: 2.14.0
+dataset: FashionMNIST, resized to 128x128, 3 channels
+vae: stabilityai/sd-vae-ft-mse
+latent: posterior mean, 4x16x16, times 0.18215
+diffusion_steps: 1000
+beta_start: 0.0001
+beta_end: 0.02
+batch_size: 128
+epochs: 50
+optimizer: Adam lr 2e-5
+label_drop: 0.1 (null label 10)
+guidance_w: 3
+loss: noise-prediction MSE
+
+# VAE
+vae scaling_factor: 0.18215
+train latent shape: (60000, 4, 16, 16)
+test reconstruction MSE: 0.000781
+
+# Forward schedule
+t=200 index=200 alpha_bar=6.563466e-01
+t=500 index=500 alpha_bar=7.779661e-02
+t=800 index=800 alpha_bar=1.507520e-03
+t=1000 index=999 alpha_bar=4.035827e-05
+forward figure: first training image, Ankle boot
+
+# Model
+U-Net parameters: 12289540
+model output shape: (2, 4, 16, 16)
+
+# Training
+epoch 01  train loss: 0.384546
+epoch 02  train loss: 0.176954
+epoch 03  train loss: 0.145862
+epoch 04  train loss: 0.134587
+epoch 05  train loss: 0.128522
+epoch 06  train loss: 0.124598
+epoch 07  train loss: 0.118522
+epoch 08  train loss: 0.116916
+epoch 09  train loss: 0.113817
+epoch 10  train loss: 0.112722
+epoch 11  train loss: 0.113271
+epoch 12  train loss: 0.111545
+epoch 13  train loss: 0.110323
+epoch 14  train loss: 0.111223
+epoch 15  train loss: 0.107158
+epoch 16  train loss: 0.107506
+epoch 17  train loss: 0.106284
+epoch 18  train loss: 0.106184
+epoch 19  train loss: 0.103879
+epoch 20  train loss: 0.103292
+epoch 21  train loss: 0.104967
+epoch 22  train loss: 0.103644
+epoch 23  train loss: 0.104170
+epoch 24  train loss: 0.103662
+epoch 25  train loss: 0.102399
+epoch 26  train loss: 0.100698
+epoch 27  train loss: 0.102135
+epoch 28  train loss: 0.101130
+epoch 29  train loss: 0.101860
+epoch 30  train loss: 0.099690
+epoch 31  train loss: 0.100084
+epoch 32  train loss: 0.098522
+epoch 33  train loss: 0.099830
+epoch 34  train loss: 0.099108
+epoch 35  train loss: 0.098868
+epoch 36  train loss: 0.098437
+epoch 37  train loss: 0.098573
+epoch 38  train loss: 0.097285
+epoch 39  train loss: 0.097625
+epoch 40  train loss: 0.099033
+epoch 41  train loss: 0.097635
+epoch 42  train loss: 0.097437
+epoch 43  train loss: 0.095975
+epoch 44  train loss: 0.097994
+epoch 45  train loss: 0.095320
+epoch 46  train loss: 0.096118
+epoch 47  train loss: 0.095815
+epoch 48  train loss: 0.095704
+epoch 49  train loss: 0.096360
+epoch 50  train loss: 0.096441
+training minutes: 111.44
+
+# Sampling
+reverse steps: 1000
+grid labels row-major: classes 0-9 repeated, last four are 0, 1, 2, 3
+64-image sampling minutes: 1.08
+guidance comparison: unconditional, conditional, and w=3 from one shared noise draw
+
+# Saved figures
+figures/reconstructions.png
+figures/forward_diffusion.png
+figures/train_loss.png
+figures/cfg_samples.png
+figures/guidance_compare.png
+
+# Saved outputs
+outputs/cfg_grid_w3.png
+checkpoints/latent_unet.pt
+
+The 64-image grid is mostly recognizable clothing. Some coats, bags, and sandals are still distorted. On the comparison figure the unconditional row does not follow the class label, and w=3 makes the conditional samples simpler.
