@@ -39,5 +39,5 @@ The code cells include comments explaining what each block is doing. The report 
 | `figures/cfg_samples.png` | 64-image grid, w = 3, classes 0–9 repeated |
 | `figures/guidance_compare.png` | Unconditional, conditional, and w = 3 on one noise draw |
 | `outputs/cfg_grid_w3.png` | Saved sample grid |
-| `checkpoints/latent_unet.pt` | Saved U-Net checkpoint |
+| `checkpoints/latent_unet_weights.pt` | Saved U-Net weights (no Adam state; under GitHub 100 MB limit) |
 | `METRICS.md` / `RUN_LOG.txt` / `AI_USE.md` | Standing notes |
