@@ -1,0 +1,188 @@
+{
+  "queries": {
+    "Q1": "learning rates for regularized kernel based methods for additive models",
+    "Q2": "positive linear magnetoresistance in topological insulator surface states",
+    "Q3_followup": "What learning rates does the paper report?"
+  },
+  "gold": {
+    "Q1": [
+      0
+    ],
+    "Q2": [
+      20
+    ],
+    "Q3_followup": [
+      0
+    ],
+    "Q3_with_memory": [
+      0
+    ]
+  },
+  "rows": [
+    {
+      "strategy": "fixed",
+      "query": "Q1",
+      "mode": "base",
+      "precision@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "top_doc_ids": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "strategy": "fixed",
+      "query": "Q1",
+      "mode": "rerank",
+      "precision@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "top_doc_ids": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "strategy": "fixed",
+      "query": "Q2",
+      "mode": "base",
+      "precision@5": 0.8,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "top_doc_ids": [
+        20,
+        20,
+        71,
+        20,
+        20
+      ]
+    },
+    {
+      "strategy": "fixed",
+      "query": "Q2",
+      "mode": "rerank",
+      "precision@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "top_doc_ids": [
+        20,
+        20,
+        20,
+        20,
+        20
+      ]
+    },
+    {
+      "strategy": "recursive",
+      "query": "Q1",
+      "mode": "base",
+      "precision@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "top_doc_ids": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "strategy": "recursive",
+      "query": "Q1",
+      "mode": "rerank",
+      "precision@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "top_doc_ids": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "strategy": "recursive",
+      "query": "Q2",
+      "mode": "base",
+      "precision@5": 0.8,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "top_doc_ids": [
+        20,
+        20,
+        71,
+        20,
+        20
+      ]
+    },
+    {
+      "strategy": "recursive",
+      "query": "Q2",
+      "mode": "rerank",
+      "precision@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "top_doc_ids": [
+        20,
+        20,
+        20,
+        20,
+        20
+      ]
+    },
+    {
+      "strategy": "recursive",
+      "query": "Q3_followup",
+      "mode": "base",
+      "precision@5": 0.8,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "top_doc_ids": [
+        0,
+        0,
+        0,
+        0,
+        51
+      ]
+    },
+    {
+      "strategy": "recursive",
+      "query": "Q3_with_memory",
+      "mode": "base",
+      "precision@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "top_doc_ids": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "strategy": "recursive",
+      "query": "Q3_with_memory",
+      "mode": "rerank",
+      "precision@5": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "top_doc_ids": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

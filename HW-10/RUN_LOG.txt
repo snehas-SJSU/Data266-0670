@@ -1,0 +1,42 @@
+DATA 266 HW10 — RUN_LOG
+Sneha Singh
+SID4=0670  SEED=670  SLICE=670  HP_ID=4  CLS_A=0  CLS_B=5
+HP_ID is reported only.
+
+notebook: rag_rerank_memory.ipynb (executed top to bottom)
+dataset: ccdv/arxiv-summarization document train[:100]
+vector_db: ChromaDB local chroma_store/
+embedding: sentence-transformers/all-MiniLM-L6-v2
+reranker: cross-encoder/ms-marco-MiniLM-L-6-v2
+chunk_fixed: 500/50 -> 7220 chunks
+chunk_recursive: 500/50 -> 7224 chunks
+indexing_minutes: 3.02
+
+# Queries
+Q1: learning rates for regularized kernel based methods for additive models  (gold=0)
+Q2: positive linear magnetoresistance in topological insulator surface states (gold=20)
+Q3: What learning rates does the paper report? (gold=0)
+
+# Metrics
+fixed/Q1/base          P@5=1.000 R@5=1.000 MRR=1.000
+fixed/Q1/rerank        P@5=1.000 R@5=1.000 MRR=1.000
+fixed/Q2/base          P@5=0.800 R@5=1.000 MRR=1.000  top_docs=20,20,71,20,20
+fixed/Q2/rerank        P@5=1.000 R@5=1.000 MRR=1.000  top_docs=20,20,20,20,20
+recursive/Q1/base      P@5=1.000 R@5=1.000 MRR=1.000
+recursive/Q1/rerank    P@5=1.000 R@5=1.000 MRR=1.000
+recursive/Q2/base      P@5=0.800 R@5=1.000 MRR=1.000  top_docs=20,20,71,20,20
+recursive/Q2/rerank    P@5=1.000 R@5=1.000 MRR=1.000  top_docs=20,20,20,20,20
+recursive/Q3/no_memory P@5=0.800 R@5=1.000 MRR=1.000  top_docs=0,0,0,0,51
+recursive/Q3/memory    P@5=1.000 R@5=1.000 MRR=1.000  top_docs=0,0,0,0,0
+recursive/Q3/mem+rerank P@5=1.000 R@5=1.000 MRR=1.000
+
+# Averages Q1/Q2
+fixed no-rerank:     P@5=0.900 MRR=1.000
+fixed rerank:        P@5=1.000 MRR=1.000
+recursive no-rerank: P@5=0.900 MRR=1.000
+recursive rerank:    P@5=1.000 MRR=1.000
+
+# Saved figures
+figures/chunk_rerank_compare.png
+figures/memory_compare.png
+outputs/metrics.json
