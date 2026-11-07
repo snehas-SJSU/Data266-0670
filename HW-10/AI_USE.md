@@ -4,7 +4,7 @@ SID4 = 0670 | SEED = 670 | SLICE = 670 | HP_ID = 4 | CLS_A = 0 | CLS_B = 5
 
 1. Which parts did you use an assistant for, and which did you write yourself?
 
-I set Step 0 the same way as HW1. I picked the first 100 `document` train articles, the two chunkers (fixed and recursive), local ChromaDB, the two content queries, and the follow-up. I ran `rag_rerank_memory.ipynb` on my Mac and used the printed metrics and figures in the report.
+I set Step 0 with SID4 670 and seed 670. I picked the first 100 `document` train articles, the two chunkers (fixed and recursive), local ChromaDB, the two content queries, and the follow-up. I ran `rag_rerank_memory.ipynb` on my Mac and used the printed metrics and figures in the report.
 
 - Step 0: SID4 670, seeds, HP_ID reported only
 - Data: `ccdv/arxiv-summarization`, document, train[:100]
@@ -14,7 +14,7 @@ I set Step 0 the same way as HW1. I picked the first 100 `document` train articl
 - Memory: rewrite the follow-up from the previous user turn
 - Metrics: Precision@5, Recall@5, MRR with manual gold doc ids
 
-I used an assistant to draft the notebook cells and the Chroma / rerank wiring, in the same section layout as HW8 and HW9.
+I used an assistant to draft the notebook cells and the Chroma / rerank wiring.
 
 2. Give one specific thing it produced that was wrong. Paste the wrong output.
 
