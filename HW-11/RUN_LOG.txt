@@ -1,0 +1,49 @@
+DATA 266 HW11 — RUN_LOG
+Sneha Singh
+SID4=0670  SEED=670  SLICE=670  HP_ID=4  CLS_A=0  CLS_B=5
+HP_ID is reported only.
+
+notebook: clip_cifar.ipynb (executed top to bottom)
+model: openai/clip-vit-base-patch32
+params: 151277313
+dataset: CIFAR-10
+device: mps
+torch: 2.14.0
+batch: 64
+caption: a photo of a dog
+imgs_per_class: 100
+similarity_images: 1000
+scoring_seconds: 8.4
+zeroshot_seconds: 80.0
+
+# Part A mean similarity (caption vs 100/class)
+airplane     0.2037
+automobile   0.1996
+bird         0.2270
+cat          0.2398
+deer         0.2337
+dog          0.2603   << highest
+frog         0.2295
+horse        0.2210
+ship         0.1948
+truck        0.1963
+
+# Part B zero-shot CIFAR-10 test
+overall_accuracy: 0.8880
+airplane     0.9010
+automobile   0.9760
+bird         0.8880
+cat          0.8600
+deer         0.7650
+dog          0.8840
+frog         0.7740
+horse        0.9760
+ship         0.9550
+truck        0.9010
+
+# Saved figures
+figures/caption_class_similarity.png
+figures/caption_top_matches.png
+figures/zeroshot_per_class_accuracy.png
+figures/zeroshot_confusion_matrix.png
+outputs/metrics.json

@@ -1,0 +1,7 @@
+.ipynb_checkpoints/
+data/
+__pycache__/
+.mplcache/
+_build_nb.py
+_execute_nb.py
+*.pt
