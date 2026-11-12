@@ -12,12 +12,12 @@ HP_ID is reported only.
 | Item | Value |
 |------|-------|
 | Model | `openai/clip-vit-base-patch32` (~151M params) |
-| Dataset | CIFAR-10 |
+| Dataset | CIFAR-10 (train for Part A, test for Part B) |
 | Caption | `a photo of a dog` |
-| Part A sample | 100 images per class (SEED=670) |
-| Zero-shot prompts | `a photo of a {class}` |
+| Part A sample | 100 images per class (1,000 total), SEED=670 |
+| Zero-shot prompts | `a photo of a {class}` for all 10 classes |
 | Device | MPS |
-| Batch | 64 |
+| Batch size | 64 |
 
 I load CLIP with the matching processor. Text and image embeddings are L2-normalized, then compared with cosine similarity (dot product of unit vectors).
 
@@ -38,17 +38,19 @@ I scored the caption against 1,000 CIFAR-10 train images (100 per class).
 | ship | 0.195 |
 | truck | 0.196 |
 
+Highest mean class: **dog** (0.260).
+
 ![Mean caption similarity by class](figures/caption_class_similarity.png)
 
-Dog has the highest mean score (0.260). Cat is next (0.240), then other animals. Vehicles sit at the bottom. That is the expected ranking for a dog caption.
+Dog ranks first, then cat and other animals. Vehicles sit at the bottom — the expected order for a dog caption.
 
 ![Top matches for the caption](figures/caption_top_matches.png)
 
-The top-12 gallery is mostly dog images, with a few other animals that still look somewhat dog-like at 32×32.
+The top-12 gallery is mostly dogs, with a few other animals that still look somewhat dog-like at 32×32.
 
 ## 3. Zero-shot CIFAR-10 classification
 
-I embedded all 10 class prompts and classified every CIFAR-10 test image by the highest cosine similarity. Overall accuracy: **0.888**.
+I embedded all 10 class prompts and classified every CIFAR-10 test image (n=10,000) by the highest cosine similarity. Overall accuracy: **0.888**.
 
 | Class | Accuracy |
 |-------|---------:|
@@ -67,8 +69,8 @@ I embedded all 10 class prompts and classified every CIFAR-10 test image by the 
 
 ![Confusion matrix](figures/zeroshot_confusion_matrix.png)
 
-Automobile and horse are strongest (97.6%). Deer is weakest (76.5%), with many deer predicted as horse. Cat↔dog and frog↔bird/cat swaps show up in the matrix; those classes share texture and shape at CIFAR resolution.
+Automobile and horse are strongest (97.6%). Deer is weakest (76.5%), mostly confused with horse. Cat↔dog and frog↔bird/cat swaps show up too — expected for similar animals at CIFAR resolution.
 
 ## Conclusion
 
-CLIP ranked the dog caption highest on dog images without any fine-tuning. Zero-shot CIFAR-10 reached 88.8% accuracy. Most errors are between visually similar classes (deer/horse, cat/dog), which matches what the confusion matrix shows.
+CLIP ranked the dog caption highest on dog images with no fine-tuning. Zero-shot CIFAR-10 reached 88.8% accuracy. Errors concentrate on visually similar pairs (deer/horse, cat/dog), matching the confusion matrix.
