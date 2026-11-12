@@ -11,8 +11,6 @@ I set Step 0 with SID4 670 and seed 670. I chose caption `"a photo of a dog"`, 1
 - Part A: caption–image cosine similarity, 100 images/class
 - Part B: zero-shot prompts `a photo of a {class}`, per-class accuracy + confusion matrix
 
-I used an assistant to draft the notebook cells and the CLIP embedding helpers.
-
 2. Give one specific thing it produced that was wrong. Paste the wrong output.
 
 The first draft treated `model.get_text_features(...)` as a tensor and called `F.normalize` on it directly. On my transformers version that call returns a `BaseModelOutputWithPooling`, so the run failed with:
