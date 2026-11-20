@@ -1,0 +1,44 @@
+DATA 266 HW12 — RUN_LOG
+Sneha Singh
+SID4=0670  SEED=670  SLICE=670  HP_ID=4  CLS_A=0  CLS_B=5
+HP_ID is reported only.
+
+notebook: llm_compress.ipynb (executed top to bottom)
+device: mps (distill) / cpu (GPTQ)
+torch: 2.15.0
+
+# Part 1 GPTQ
+base_llm: facebook/opt-125m
+dataset: Salesforce/wikitext wikitext-2-raw-v1
+calib_n: 128
+bits: 4  group_size: 128
+base: ppl=43.963 p50/p95=18.2/21.7 mem=0.69 disk=242.3
+gptq: ppl=47.465 p50/p95=68.3/73.2 mem=0.55 disk=122.7
+
+# Part 2 Distillation
+teacher: teacher_model (BERT-base AG News)
+student: distilbert/distilbert-base-uncased
+ag_news: fancyzhx/ag_news train=120000 test=7600
+epochs: 1  batch: 32  max_len: 128  lr: 2e-5
+teacher_acc: 0.9443
+
+T sweep (alpha=0.5):
+T1  acc=0.9384
+T2  acc=0.9389  << best T
+T5  acc=0.9376
+T10 acc=0.9384
+
+alpha sweep (T=2):
+a0.25 acc=0.9384
+a0.50 acc=0.9389  << best
+a0.75 acc=0.9382
+
+worst_class_drop: BUSINESS +0.0195
+
+# Figures
+figures/distill_temperature_sweep.png
+figures/distill_alpha_sweep.png
+figures/distill_loss_terms.png
+figures/distill_per_class.png
+figures/distill_confusion_matrix.png
+outputs/metrics.json

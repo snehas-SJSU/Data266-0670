@@ -1,0 +1,15 @@
+.ipynb_checkpoints/
+data/
+__pycache__/
+.mplcache/
+_build_nb.py
+_execute_nb.py
+*.pt
+gptq_opt125m_smoke/
+teacher_model/
+student_runs/
+checkpoints/
+outputs/teacher_logits.pt
+outputs/*.pt
+HW12_Report.md
+.cache/

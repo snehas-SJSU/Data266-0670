@@ -1,0 +1,185 @@
+{
+  "sid4": 670,
+  "seed": 670,
+  "base_llm": "facebook/opt-125m",
+  "gptq": {
+    "base": {
+      "quality_metric": "ppl 43.963",
+      "p50_ms": 18.183645501267165,
+      "p95_ms": 21.709275297325803,
+      "peak_mem_gb": 0.6907958984375,
+      "disk_mb": 242.29136276245117
+    },
+    "gptq": {
+      "quality_metric": "ppl 47.465",
+      "p50_ms": 68.26345899753505,
+      "p95_ms": 73.17639389948454,
+      "peak_mem_gb": 0.553253173828125,
+      "disk_mb": 122.71897220611572
+    }
+  },
+  "teacher": {
+    "accuracy": 0.9443421052631579,
+    "p50_ms": 461.5545204942464,
+    "p95_ms": 499.4972456472169,
+    "peak_mem_gb": 0.40856122970581055,
+    "disk_mb": 418.5822582244873
+  },
+  "temperature_sweep": [
+    {
+      "T": 1,
+      "alpha": 0.5,
+      "accuracy": 0.9384210526315789,
+      "disk_mb": 256.1106843948364,
+      "history": [
+        {
+          "epoch": 0,
+          "loss": 0.22831824748665094,
+          "ce": 0.2431678496705989,
+          "kld": 0.2134686451834937
+        }
+      ]
+    },
+    {
+      "T": 2,
+      "alpha": 0.5,
+      "accuracy": 0.9389473684210526,
+      "disk_mb": 256.1106843948364,
+      "history": [
+        {
+          "epoch": 0,
+          "loss": 0.4570120380183061,
+          "ce": 0.2654399327462539,
+          "kld": 0.6485841435606281
+        }
+      ]
+    },
+    {
+      "T": 5,
+      "alpha": 0.5,
+      "accuracy": 0.9376315789473684,
+      "disk_mb": 256.1106843948364,
+      "history": [
+        {
+          "epoch": 0,
+          "loss": 0.7191148471241195,
+          "ce": 0.29822480941147855,
+          "kld": 1.1400048845410347
+        }
+      ]
+    },
+    {
+      "T": 10,
+      "alpha": 0.5,
+      "accuracy": 0.9384210526315789,
+      "disk_mb": 256.1106843948364,
+      "history": [
+        {
+          "epoch": 0,
+          "loss": 0.717465732606252,
+          "ce": 0.30156115833750613,
+          "kld": 1.133370305899779
+        }
+      ]
+    }
+  ],
+  "alpha_sweep": [
+    {
+      "T": 2,
+      "alpha": 0.25,
+      "accuracy": 0.9384210526315789,
+      "disk_mb": 256.1106843948364
+    },
+    {
+      "T": 2,
+      "alpha": 0.5,
+      "accuracy": 0.9389473684210526,
+      "disk_mb": 256.1106843948364
+    },
+    {
+      "T": 2,
+      "alpha": 0.75,
+      "accuracy": 0.9381578947368421,
+      "disk_mb": 256.1106843948364
+    }
+  ],
+  "best_student": {
+    "run_name": "T2_a50",
+    "T": 2,
+    "alpha": 0.5,
+    "accuracy": 0.9389473684210526,
+    "p50_ms": 143.99372899788432,
+    "p95_ms": 147.70713140096632,
+    "peak_mem_gb": 1.4312996864318848,
+    "disk_mb": 256.1106843948364
+  },
+  "per_class": [
+    {
+      "class": "WORLD",
+      "teacher": 0.9489473684210527,
+      "student": 0.9484210526315789,
+      "drop": 0.000526315789473708
+    },
+    {
+      "class": "SPORTS",
+      "teacher": 0.988421052631579,
+      "student": 0.9873684210526316,
+      "drop": 0.001052631578947416
+    },
+    {
+      "class": "BUSINESS",
+      "teacher": 0.9136842105263158,
+      "student": 0.8942105263157895,
+      "drop": 0.01947368421052631
+    },
+    {
+      "class": "SCI/TECH",
+      "teacher": 0.9263157894736842,
+      "student": 0.9257894736842105,
+      "drop": 0.000526315789473708
+    }
+  ],
+  "worst_class": {
+    "class": "BUSINESS",
+    "teacher": 0.9136842105263158,
+    "student": 0.8942105263157895,
+    "drop": 0.01947368421052631
+  },
+  "error_examples": [
+    {
+      "id": 16,
+      "text": "Scientists Discover Ganymede has a Lumpy Interior Jet Propulsion Lab -- Scientists have discovered irregular lumps beneath the icy surface of Jupiter's largest moon, Ganymede. These irregular masses may be rock formations, supported by Ganymede's icy shell for billions of years..",
+      "gold": "SCI/TECH",
+      "teacher": "SCI/TECH",
+      "student": "WORLD"
+    },
+    {
+      "id": 47,
+      "text": "Dell Exits Low-End China Consumer PC Market  HONG KONG (Reuters) - Dell Inc. &lt;DELL.O&gt;, the world's  largest PC maker, said on Monday it has left the low-end  consumer PC market in China and cut its overall growth target  for the country this year due to stiff competition in",
+      "gold": "SCI/TECH",
+      "teacher": "SCI/TECH",
+      "student": "BUSINESS"
+    },
+    {
+      "id": 110,
+      "text": "Yahoo! Ups Ante for Small Businesses Web giant Yahoo! is gambling that price cuts on its domain name registration and Web hosting products will make it more competitive with discounters in the space -- which means that small businesses looking to move online get a sweeter deal th",
+      "gold": "BUSINESS",
+      "teacher": "BUSINESS",
+      "student": "SCI/TECH"
+    },
+    {
+      "id": 141,
+      "text": "Bush Promotes His Plan for Missile Defense System President Bush, in Pennsylvania, said that opponents of a missile defense system were putting the nation's security at risk.",
+      "gold": "WORLD",
+      "teacher": "WORLD",
+      "student": "SCI/TECH"
+    },
+    {
+      "id": 149,
+      "text": "Greek sprinters arrive at IOC hearing ATHENS (Reuters) - Greek sprinters Costas Kenteris and Katerina Thanou have arrived at an Athens hotel for an International Olympic Committee (IOC) hearing into their missed doped tests, a saga that has shamed and angered the Olympic host ...",
+      "gold": "SPORTS",
+      "teacher": "SPORTS",
+      "student": "WORLD"
+    }
+  ]
+}
